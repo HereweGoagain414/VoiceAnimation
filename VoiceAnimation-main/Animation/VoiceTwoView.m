@@ -255,7 +255,7 @@
             }
         }
     }
-    // 3. 预计算下一波次的振幅（用于平滑过渡）
+    // 4. 预计算下一波次的振幅（用于平滑过渡）
         if (_transitionProgress > 0.5) {
             CGFloat nextTargetAmplitudes[lineNum];
             memset(nextTargetAmplitudes, 0, sizeof(CGFloat) * lineNum);
@@ -298,7 +298,7 @@
             }
         }
     
-    // 3. 平滑过渡到目标振幅
+    // 5. 平滑过渡到目标振幅
     CGFloat smoothingFactor = 0.45; // 平滑因子
     for (int i = 0; i < lineNum; i++) {
         CGFloat current = [_currentAmplitudes[i] floatValue];
@@ -309,7 +309,7 @@
         _currentAmplitudes[i] = @(newAmplitude);
     }
 
-    // 4. 绘制所有波形
+    // 6. 绘制所有波形
     self.levelPath = [UIBezierPath bezierPath];
     for (int i = 0; i < lineNum; i++) {
         CGFloat x = left + i * (lineWidth + lineMargin);
@@ -331,7 +331,7 @@
         [self.levelPath addLineToPoint:CGPointMake(x, endY)];
     }
     
-    // 5. 添加路径动画
+    // 7. 添加路径动画
     CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
     pathAnimation.duration = 0.05;
     pathAnimation.fromValue = (__bridge id)self.shapeLayer.path;
